@@ -24,6 +24,22 @@ protected:
             }
             left = right = nullptr;
         }
+        void out(std::ostream &stream, unsigned k)
+        {
+            for (int i = 0; i < k; i++) {
+                stream << " ";
+            }
+
+            stream << "[" << key << "]\n";
+
+            if (left) {
+                left->out(stream, k - 5);
+            }
+
+            if(right){
+                right->out(stream, k + 5);
+            }
+        }
     } *root;
 public:
     BinaryTree() : root(nullptr) {}
@@ -31,4 +47,8 @@ public:
     void add(K key, D data, bool override = true);
     D search(K key);
     void remove(K key);
+    void out(std::ostream &stream, unsigned k = 50)
+    {
+        root->out(stream, k);
+    }
 };
